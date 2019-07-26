@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package terry.user.srv.service;
+
+service Service {
+
+    // 登录
+    rpc Login (Input) returns (Output) {
+
+    }
+
+    // 注册
+    rpc Register (Input) returns (Output) {
+
+    }
+    rpc Call (Request) returns (Response) {
+    }
+    rpc Stream (StreamingRequest) returns (stream StreamingResponse) {
+    }
+    rpc PingPong (stream Ping) returns (stream Pong) {
+    }
+}
+
+message Input {
+    string phone = 1; // 手机号码
+    string password = 2; // 用户信息
+}
+
+message Output {
+    int32 code = 1; // 返回状态码
+    string msg = 2; // 返回信息
+}
+message Message {
+    string say = 1;
+}
+
+message Request {
+    string name = 1;
+}
+
+message Response {
+    string msg = 1;
+}
+
+message StreamingRequest {
+    int64 count = 1;
+}
+
+message StreamingResponse {
+    int64 count = 1;
+}
+
+message Ping {
+    int64 stroke = 1;
+}
+
+message Pong {
+    int64 stroke = 1;
+}

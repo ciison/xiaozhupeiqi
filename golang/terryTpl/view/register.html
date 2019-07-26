@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body style="width: 100%;">
+<div id="my-app" class="container-fluid" style="width: 100%!important;">
+    <div class="container-fluid nav navbar"
+         style="background-color: wheat!important; margin-left: -28px; margin-right: -28px; padding-left:16px;">
+        <h3>{{message}}</h3>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <p style="font-size: 16px;"> {{leftContent}}</p>
+            </div>
+            <div class="col-sm-4">
+                <p style="font-size: 16px;">
+                    {{centerContent}}
+                </p>
+            </div>
+            <div class="col-sm-4" style="padding: 100px;">
+                <div>
+                    <h3 style="text-align: center">{{rightTitle}}</h3>
+                    <form>
+                        <div class="form-group">
+                            <label>phone</label>
+                            <input type="email" class="form-control" id=""
+                                   v-model="phone" placeholder="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Password</label>
+                            <input type="password" class="form-control" id=""
+                                   v-model="password" placeholder="Password">
+                        </div>
+
+                        <button type="submit" class="form-control btn btn-primary"
+                                v-on:click="register">Submit <!--点击触发 register 方法-->
+                        </button>
+                        <p><a href="/login">已经有账号？</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="foot"></div>
+</div>
+</body>
+<script>
+    // 这是 vue 的一个实例对象
+    let v = new Vue({
+        el: "#my-app",
+        data: {
+            message: "你好, 我是 xiao 成!",
+            leftContent: "这是左边栏",
+            centerContent: "这是中间的内容区域",
+            rightTitle: "注册页面",
+            password: "",
+            phone: "",
+            requestURL:"/register", // 用户注册的请求 URL
+        },
+        methods: {
+            demo: function () {
+                console.log("helloWorld")
+            },
+
+            // 这里实现注册的前端
+            register:function () {
+
+                return axios.post(this.requestURL, {
+                    // 这里填写请求参数
+                    phone:this.phone, // 。。。。 /(ㄒoㄒ)/~~
+                    password: this.password,
+                }).then(function (response) {
+                    let data = response.data
+                    console.log(data)
+                    if (data.code == 1 ){
+                        alert(data.msg)
+                    }
+
+                })
+            }
+
+
+        },
+    })
+</script>
+</html>
