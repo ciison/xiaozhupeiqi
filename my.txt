@@ -1,0 +1,1 @@
+method:/pb.Greeter/Hello, status:InvalidArgument, latency:0s, req:{"id":-233,"book_time":1595153401}, resp:
