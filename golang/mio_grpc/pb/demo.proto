@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+
+package pb;
+
+
+message HelloRequest {
+  //@inject_tag: validate:"required,gte=0"
+  int64  id = 1;
+  //@inject_tag:validate:"required"
+  string user_name = 2;
+  //@inject_tag:validate:"required"
+  string user_address = 3;
+  int64  book_time = 4;
+  //@inject_tag:validate:"required"
+  string random_str = 5;
+}
+
+message  HelloResponse {
+  int64  err_no = 1;
+  string err_code = 2;
+  repeated string res_data = 3;
+}
+
+message OutOfIndexRequest {
+  repeated  int64  ids = 1;
+}
+
+message OutOfIndexResponse {
+  string data = 1;
+}
+
+message NilPointerRequest {
+  value data  =1;
+}
+
+message value {
+  string data = 2;
+}
+
+message  NilPointerResponse {
+  string data = 1;
+}
+
+service Greeter {
+  rpc Hello(HelloRequest)returns(HelloResponse){}
+  rpc OutOfIndex(OutOfIndexRequest)returns(OutOfIndexResponse){}
+  rpc NilPointer(NilPointerRequest)returns(NilPointerResponse){}
+}
